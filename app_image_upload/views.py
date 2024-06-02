@@ -30,7 +30,7 @@ def create_image(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_images():
-  images = Image.objects.all()
+def get_images(request):
+  images = Image.objects.all().order_by('-created_at')
   images_serialized = ImageSerializer(images, many=True)
   return Response(images_serialized.data)
